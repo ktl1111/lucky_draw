@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+    {#    <audio id="Player" autoplay>#}
+    {#        <source src="{% static "app/welcome.wav" %}"/>#}
+    {#    </audio>#}
+
+    <div class="container">
+        <img src="{% static "app/bg-stamp.png" %}" id="img_top">
+        <div id="tbl" class="row justify-content-center">
+            <div class="col-auto">
+                <form action="{% url 'draw' %}" method="GET" class="col">
+                    <button type="submit" value="start" name="start" id="btn"
+                            class="btn btn-success btn-outline-light btn-lg btn-block">開始抽獎
+                    </button>
+                </form>
+                <span id="gif" class="d-none">
+                    <img src="{% static "app/load.gif" %}" alt="loading gif" style="border-radius: 50%" width=400/>
+                </span>
+
+            </div>
+        </div>
+        <img src="{% static "app/bg-stamp.png" %}" id="img_down">
+
+
+    </div>
+
+    <script>
+
+        $('#btn').click(function () {
+            $('#gif').removeClass("d-none");
+            $('#btn').addClass("d-none");
+
+        });
+
+    </script>
+
+{% endblock %}

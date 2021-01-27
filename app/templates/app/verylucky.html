@@ -1,0 +1,17 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+    <h2>尚未中獎者</h2>
+    <div class="container">
+        <div class="col">
+            <a href="{% url 'list' %}" style="color: white">回到中獎名單</a>
+            {% for man in luckymen %}
+                <span>{{ man }}</span>
+                {% empty %}
+                <div>NO PERSON</div>
+            {% endfor %}
+
+        </div>
+    <div class="col">TEST</div>
+    </div>
+{% endblock %}

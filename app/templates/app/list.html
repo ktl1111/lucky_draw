@@ -1,0 +1,77 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+    <h2>中獎名單</h2>
+    <div class="container" style="text-align: center">
+
+        <div class="col-auto">
+
+{#            <a href="{% url 'index' %}" style="color: white">回到抽獎頁面</a>#}
+            <a href="{% url 'export_users_xls' %}" style="color: white">匯出中獎名單</a>
+        </div>
+        <div class="col-auto marquee">
+            <p>&#9733;尚未中獎人:
+                {% for man in luckymen %}
+                    <span>{{ man }}</span>
+                {% empty %}
+                    <p>NO PERSON</p>
+                {% endfor %}
+            </p>
+
+        </div>
+
+
+        <div id="tbl" class="row justify-content-center">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless table-warning">
+                        <thead class="thead-dark">
+                        <tr class="">
+                            <th class="">獎品</th>
+                            <th class="">中獎人</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, value in output.items %}
+                            <tr class="">
+                                <td style="width: 40%">{{ key }}</td>
+                                <td style="width: 60%">{{ value }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="{% static "app/bg-stamp.png" %}" id="img_down_list">
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <script>
+        var $el = $(".table-responsive");
+        var speed = 350000; // 10000 = 10 seconds
+
+        var doScroll = function () {
+            var st = $el.scrollTop();
+            var sb = $el.prop("scrollHeight") - $el.innerHeight();
+            var direction = st != 0 ? 0 : sb;
+            $el.animate({scrollTop: direction}, speed, 'linear');
+        }
+
+        function stop() {
+            $el.stop();
+        }
+
+        doScroll(); // once on page load
+        setInterval(doScroll, speed + 10); // once every X ms
+        {#$el.hover(stop, doScroll);#}
+
+
+    </script>
+
+
+{% endblock %}
