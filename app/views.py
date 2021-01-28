@@ -17,9 +17,8 @@ from xlsxwriter import Workbook
 
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from app.models import Result
+from app.models import Result, Verylucky
 
-from django.contrib import messages
 from django.contrib.staticfiles import finders
 from django.urls import reverse
 
@@ -71,13 +70,19 @@ def draw(request):
         people.remove(winner)
         rest = people
 
-    # 把資料存入DB(model)
+    # 把資料存入DB(model: Result)
     for i in prizes_n:
         r = Result()
         # print(i, prizes_n[i])
         r.prize = i
         r.winner = prizes_n[i]
         r.save()
+
+    # 把資料存入DB(model: Verylucky)
+    for j in people:
+        v = Verylucky()
+        v.luckymen = j
+        v.save()
 
     # 人配獎品
     print(prizes_n)
@@ -124,6 +129,35 @@ def export_users_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
     rows = Result.objects.all().values_list('prize', 'winner')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+    wb.save(response)
+    return response
+
+def export_users_xls_verylucky(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="verylucky.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('未中獎名單')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['未中獎人', '贊助獎品', '中獎人簽收欄']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+    rows = Verylucky.objects.all().values_list('luckymen')
+    # print(rows)
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):

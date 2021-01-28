@@ -5,3 +5,6 @@ from django.db import models
 class Result(models.Model):
     winner = models.TextField()
     prize = models.TextField()
+
+class Verylucky(models.Model):
+    luckymen = models.TextField()
