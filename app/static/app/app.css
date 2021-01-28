@@ -147,3 +147,6 @@ h2 {
     z-index: 1;
     bottom: 500px;
 }
+
+tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; }
