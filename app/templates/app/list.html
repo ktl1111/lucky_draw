@@ -20,15 +20,14 @@
 
         </div>
 
-
         <div id="tbl" class="row justify-content-center">
             <div class="col">
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless table-warning tableFixHead">
                         <thead class="thead-dark">
-                        <tr class="">
-                            <th class="">獎品</th>
-                            <th class="">中獎人</th>
+                        <tr class="tbl-head">
+                            <th>中獎人</th>
+                            <th>獎品</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,48 +51,7 @@
 
 
     <script>
-    /*
-      $(document).ready(function() {
-
-      pageScroll();
-      $("#contain").mouseover(function() {
-        clearTimeout(my_time);
-      }).mouseout(function() {
-        pageScroll();
-      });
-
-      getWidthHeader('table_fixed','table_scroll');
-
-    });
-
-    var my_time;
-    function pageScroll() {
-        var objDiv = document.getElementById("contain");
-      objDiv.scrollTop = objDiv.scrollTop + 1;
-      if ((objDiv.scrollTop + 100) == objDiv.scrollHeight) {
-        objDiv.scrollTop = 0;
-      }
-      my_time = setTimeout('pageScroll()', 25);
-    }
-
-    function getWidthHeader(id_header, id_scroll) {
-      var colCount = 0;
-      $('#' + id_scroll + ' tr:nth-child(1) td').each(function () {
-        if ($(this).attr('colspan')) {
-          colCount += +$(this).attr('colspan');
-        } else {
-          colCount++;
-        }
-      });
-
-      for(var i = 1; i <= colCount; i++) {
-        var th_width = $('#' + id_scroll + ' > tbody > tr:first-child > td:nth-child(' + i + ')').width();
-        $('#' + id_header + ' > thead th:nth-child(' + i + ')').css('width',th_width + 'px');
-      }
-    }
-
-     */
-
+/*up-down auto scroll*/
         var $el = $(".table-responsive");
         var speed = 15100; // 10000 = 10 seconds
 
@@ -109,11 +67,8 @@
         }
 
         doScroll(); // once on page load
-        setInterval(doScroll, speed + 10); // once every X ms
+        setInterval(doScroll, speed + 5); // once every X ms
         {#$el.hover(stop, doScroll);#}
-
-
-
     </script>
 
 

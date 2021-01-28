@@ -7,7 +7,7 @@
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 .marquee p {
     display: inline-block;
@@ -55,10 +55,14 @@
 }
 
 .table-responsive{
-  height:1200px; /*1200px*/
-  width:100%;
+  height: 833px; /*1200px*/
+  width: 100%;
   overflow-y: auto;
-  border:2px solid #444;
+  border: 2px solid #444;
+}
+
+.tbl-head {
+    line-height: 65px;
 }
 
 /*.table::-webkit-scrollbar {*/
@@ -147,6 +151,8 @@ h2 {
     z-index: 1;
     bottom: 500px;
 }
+
+/*table head fix*/
 
 tableFixHead          { overflow-y: auto; height: 100px; }
 .tableFixHead thead th { position: sticky; top: 0; }
